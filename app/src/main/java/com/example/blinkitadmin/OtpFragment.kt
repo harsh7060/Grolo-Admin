@@ -59,7 +59,6 @@ class OtpFragment : Fragment() {
         viewModel.signInWithPhoneAuthCredential(otp, userNumber, admin)
         lifecycleScope.launch {
             viewModel.isSignedInSuccessfully.collect{
-                admin.uid = Utils.getCurrentUserId()
                 if(it){
                     Utils.hideDialog()
                     Utils.showToast(requireContext(),"Login Successfully")

@@ -54,12 +54,13 @@ class AuthViewModel: ViewModel() {
         PhoneAuthProvider.verifyPhoneNumber(options)
     }
 
-    fun signInWithPhoneAuthCredential(otp: String, userNumber: String, user: Admin) {
+    fun signInWithPhoneAuthCredential(otp: String, userNumber: String, admin: Admin) {
         val credential = PhoneAuthProvider.getCredential(_verificationId.value.toString(), otp)
         Utils.getAuthInstance().signInWithCredential(credential)
             .addOnCompleteListener{ task ->
+                admin.uid = Utils.getCurrentUserId()
                 if (task.isSuccessful) {
-                    FirebaseDatabase.getInstance().getReference("Admins").child("AdminInfo").child(user.uid!!).setValue(user)
+                    FirebaseDatabase.getInstance().getReference("Admins").child("AdminInfo").child(admin.uid!!).setValue(admin)
                     isSignedInSuccessfully.value = true
                 } else {
 

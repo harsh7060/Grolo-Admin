@@ -35,14 +35,10 @@ object Utils {
     }
 
     fun getCurrentUserId(): String {
-        val user = FirebaseAuth.getInstance().currentUser
-        if (user != null) {
-            val uid = user.uid
-            return uid
-        } else {
-            return ""
-        }
+        return FirebaseAuth.getInstance().currentUser!!.uid
     }
 
-
+    fun getRandomId(): String{
+        return (1..25).map{(('A'..'Z')+('a'..'z')+('0'..'9')).random()}.joinToString("")
+    }
 }
