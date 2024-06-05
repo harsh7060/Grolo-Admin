@@ -74,4 +74,10 @@ dependencies {
     implementation("com.google.firebase:firebase-storage-ktx")
     implementation("com.google.firebase:firebase-database-ktx")
     implementation("com.google.firebase:firebase-messaging-ktx:24.0.0")
+
+    //image slider
+    implementation("com.github.denzcoskun:ImageSlideshow:0.1.2")
+
+    //shimmer effect
+    implementation("com.facebook.shimmer:shimmer:0.5.0@aar")
 }

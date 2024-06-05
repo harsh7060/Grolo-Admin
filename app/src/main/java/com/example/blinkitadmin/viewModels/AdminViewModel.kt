@@ -4,11 +4,16 @@ import android.net.Uri
 import androidx.lifecycle.ViewModel
 import com.example.blinkitadmin.Utils
 import com.example.blinkitadmin.model.Product
-import com.google.firebase.Firebase
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.callbackFlow
 import java.util.UUID
 
 class AdminViewModel: ViewModel() {
@@ -46,13 +51,46 @@ class AdminViewModel: ViewModel() {
     fun saveProduct(product: Product){
         FirebaseDatabase.getInstance().getReference("Admins").child("All Products/${product.productId}").setValue(product)
             .addOnSuccessListener {
-                FirebaseDatabase.getInstance().getReference("Admins").child("ProductCategory/${product.productId}").setValue(product)
+                FirebaseDatabase.getInstance().getReference("Admins").child("ProductCategory/${product.productCategory}/${product.productId}").setValue(product)
                     .addOnSuccessListener {
-                        FirebaseDatabase.getInstance().getReference("Admins").child("ProductType/${product.productId}").setValue(product)
+                        FirebaseDatabase.getInstance().getReference("Admins").child("ProductType/${product.productType}/${product.productId}").setValue(product)
                             .addOnSuccessListener {
                                 _isProductSaved.value = true
                             }
                     }
             }
+    }
+
+    fun fetchAllProducts(category: String): Flow<List<Product>> = callbackFlow {
+        val db = FirebaseDatabase.getInstance().getReference("Admins").child("All Products")
+
+        val eventListener = object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val products = ArrayList<Product>()
+                for(product in snapshot.children){
+                    val prod = product.getValue(Product::class.java)
+                    if(category=="All" || prod?.productCategory==category){
+                        products.add(prod!!)
+                    }
+                }
+                trySend(products)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        }
+
+        db.addValueEventListener(eventListener)
+
+        awaitClose{db.removeEventListener(eventListener)}
+
+    }
+
+    fun savingUpdatedProduct(product: Product){
+        FirebaseDatabase.getInstance().getReference("Admins").child("All Products/${product.productId}").setValue(product)
+        FirebaseDatabase.getInstance().getReference("Admins").child("ProductCategory/${product.productCategory}/${product.productId}").setValue(product)
+        FirebaseDatabase.getInstance().getReference("Admins").child("ProductType/${product.productType}/${product.productId}").setValue(product)
     }
 }
