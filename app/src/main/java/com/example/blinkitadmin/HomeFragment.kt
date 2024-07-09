@@ -1,6 +1,8 @@
 package com.example.blinkitadmin
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +23,7 @@ import kotlinx.coroutines.launch
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     val viewModel: AdminViewModel by viewModels()
+    private lateinit var adapterProduct: AdapterProduct
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,9 +32,30 @@ class HomeFragment : Fragment() {
 
         setCategories()
 
+        searchProduct()
+
         getAllProducts("All")
 
         return binding.root
+    }
+
+    private fun searchProduct() {
+        binding.etSearch.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val query = s.toString().trim()
+                adapterProduct.getFilter().filter(query)
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+        })
     }
 
     private fun getAllProducts(category: String) {
@@ -45,10 +69,10 @@ class HomeFragment : Fragment() {
                     binding.rvProducts.visibility = View.VISIBLE
                     binding.tvText.visibility = View.GONE
                 }
-                val adapterProduct = AdapterProduct(::onEditBtnClick)
+                adapterProduct = AdapterProduct(::onEditBtnClick)
                 binding.rvProducts.adapter = adapterProduct
                 adapterProduct.differ.submitList(it)
-
+                adapterProduct.originalList = it as ArrayList<Product>
                 binding.shimmerViewContainer.visibility = View.GONE
             }
         }
