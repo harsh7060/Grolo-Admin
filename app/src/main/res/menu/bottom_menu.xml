@@ -4,9 +4,9 @@
         android:title="Home"
         android:icon="@drawable/home"/>
     <item android:id="@+id/addProductFragment"
-        android:title="AddProductFragment"
+        android:title="Add Products"
         android:icon="@drawable/cartt"/>
     <item android:id="@+id/orderFragment"
-        android:title="OrderFragment"
+        android:title="Orders"
         android:icon="@drawable/history"/>
 </menu>

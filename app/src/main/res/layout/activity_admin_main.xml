@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminMainActivity">
+    android:background="@color/white"
+    tools:context=".activities.AdminMainActivity">
 
     <fragment
         android:id="@+id/fragmentContainerView2"
@@ -25,8 +26,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:menu="@menu/bottom_menu"
+        android:background="@color/white"
         app:itemIconTint="@drawable/bottom_menu_icon_colour"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.blinkitadmin
+package com.example.blinkitadmin.utils
 
 import android.content.Context
 import android.view.LayoutInflater

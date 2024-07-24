@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.denzcoskun.imageslider.models.SlideModel
-import com.example.blinkitadmin.FilteringProduct
+import com.example.blinkitadmin.classes.FilteringProduct
 import com.example.blinkitadmin.databinding.ItemViewProductBinding
 import com.example.blinkitadmin.model.Product
 

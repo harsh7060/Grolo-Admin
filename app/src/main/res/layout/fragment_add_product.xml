@@ -5,7 +5,7 @@
     android:id="@+id/add_product_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddProductFragment"
+    tools:context=".fragments.AddProductFragment"
     android:orientation="vertical"
     android:background="@color/white">
 
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Please fill Product details"
-        android:textColor="@color/yellow"
+        android:textColor="@color/black"
         android:textSize="18.20sp"
         android:layout_gravity="center"
         android:layout_marginTop="13.0dp"/>
@@ -46,9 +46,10 @@
                 app:boxCornerRadiusBottomStart="16.90dp"
                 app:boxCornerRadiusTopEnd="16.90dp"
                 app:boxCornerRadiusTopStart="16.90dp"
-                app:cursorColor="@color/yellow"
+                app:cursorColor="@color/black"
+                app:boxStrokeColor="@color/black"
                 app:endIconMode="clear_text"
-                app:hintTextColor="@color/yellow">
+                app:hintTextColor="@color/black">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etProductName"
                     android:layout_width="match_parent"
@@ -78,9 +79,10 @@
                     app:boxCornerRadiusBottomStart="16.90dp"
                     app:boxCornerRadiusTopEnd="16.90dp"
                     app:boxCornerRadiusTopStart="16.90dp"
-                    app:cursorColor="@color/yellow"
+                    app:cursorColor="@color/black"
+                    app:boxStrokeColor="@color/black"
                     app:endIconMode="clear_text"
-                    app:hintTextColor="@color/yellow">
+                    app:hintTextColor="@color/black">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etProductQuantity"
                         android:layout_width="match_parent"
@@ -101,8 +103,9 @@
                     app:boxCornerRadiusBottomStart="16.90dp"
                     app:boxCornerRadiusTopEnd="16.90dp"
                     app:boxCornerRadiusTopStart="16.90dp"
-                    app:cursorColor="@color/yellow"
-                    app:hintTextColor="@color/yellow">
+                    app:cursorColor="@color/black"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/black">
                     <AutoCompleteTextView
                         android:id="@+id/etProductUnit"
                         android:layout_width="match_parent"
@@ -131,9 +134,10 @@
                     app:boxCornerRadiusBottomStart="16.90dp"
                     app:boxCornerRadiusTopEnd="16.90dp"
                     app:boxCornerRadiusTopStart="16.90dp"
-                    app:cursorColor="@color/yellow"
+                    app:cursorColor="@color/black"
+                    app:boxStrokeColor="@color/black"
                     app:endIconMode="clear_text"
-                    app:hintTextColor="@color/yellow">
+                    app:hintTextColor="@color/black">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etProductPrice"
                         android:layout_width="match_parent"
@@ -154,8 +158,9 @@
                     app:boxCornerRadiusBottomStart="16.90dp"
                     app:boxCornerRadiusTopEnd="16.90dp"
                     app:boxCornerRadiusTopStart="16.90dp"
-                    app:cursorColor="@color/yellow"
-                    app:hintTextColor="@color/yellow">
+                    app:cursorColor="@color/black"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/black">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etProductStocks"
                         android:layout_width="match_parent"
@@ -175,8 +180,9 @@
                 app:boxCornerRadiusBottomStart="16.90dp"
                 app:boxCornerRadiusTopEnd="16.90dp"
                 app:boxCornerRadiusTopStart="16.90dp"
-                app:cursorColor="@color/yellow"
-                app:hintTextColor="@color/yellow">
+                app:cursorColor="@color/black"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/black">
                 <AutoCompleteTextView
                     android:id="@+id/etProductCategory"
                     android:layout_width="match_parent"
@@ -193,8 +199,9 @@
                 app:boxCornerRadiusBottomStart="16.90dp"
                 app:boxCornerRadiusTopEnd="16.90dp"
                 app:boxCornerRadiusTopStart="16.90dp"
-                app:cursorColor="@color/yellow"
-                app:hintTextColor="@color/yellow">
+                app:cursorColor="@color/black"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/black">
                 <AutoCompleteTextView
                     android:id="@+id/etProductType"
                     android:layout_width="match_parent"

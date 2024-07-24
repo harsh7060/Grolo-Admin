@@ -1,5 +1,6 @@
-package com.example.blinkitadmin
+package com.example.blinkitadmin.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,10 +12,15 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.blinkitadmin.constant.Constants
+import com.example.blinkitadmin.R
+import com.example.blinkitadmin.activities.AuthMainActivity
+import com.example.blinkitadmin.utils.Utils
 import com.example.blinkitadmin.adapters.AdapterProduct
 import com.example.blinkitadmin.adapters.CategoriesAdapter
 import com.example.blinkitadmin.databinding.EditProductLayoutBinding
 import com.example.blinkitadmin.databinding.FragmentHomeBinding
+import com.example.blinkitadmin.databinding.LogoutLayoutBinding
 import com.example.blinkitadmin.model.Category
 import com.example.blinkitadmin.model.Product
 import com.example.blinkitadmin.viewModels.AdminViewModel
@@ -34,9 +40,43 @@ class HomeFragment : Fragment() {
 
         searchProduct()
 
+        onLogoutBtnClick()
+
         getAllProducts("All")
 
         return binding.root
+    }
+
+    private fun logoutAdmin() {
+        val logoutLayoutBinding = LogoutLayoutBinding.inflate(LayoutInflater.from(requireContext()))
+        val alertDialog = AlertDialog.Builder(requireContext())
+            .setView(logoutLayoutBinding.root)
+            .create()
+        alertDialog.show()
+        alertDialog.setCancelable(false)
+
+        logoutLayoutBinding.btnLogout.setOnClickListener{
+            viewModel.logoutUser()
+            Utils.showToast(requireContext(), "SignedOut Successfully.")
+            startActivity(Intent(requireContext(), AuthMainActivity::class.java))
+            requireActivity().finish()
+        }
+        logoutLayoutBinding.btnCancel.setOnClickListener{
+            alertDialog.dismiss()
+        }
+    }
+
+    private fun onLogoutBtnClick() {
+        binding.tbHomeFragment.setOnMenuItemClickListener{
+            when(it.itemId){
+                R.id.logout->{
+                    logoutAdmin()
+                    true
+                }else->{
+                    false
+                }
+            }
+        }
     }
 
     private fun searchProduct() {
@@ -120,15 +160,21 @@ class HomeFragment : Fragment() {
                 product.productUnit = editProduct.etProductUnit.text.toString()
                 viewModel.savingUpdatedProduct(product)
             }
-            Utils.showToast(requireContext(),"Product Updated Successfully ✅")
+            Utils.showToast(requireContext(), "Product Updated Successfully ✅")
             alertDialog.dismiss()
         }
     }
 
     private fun setAutoCompleteTextView(editProduct: EditProductLayoutBinding) {
         val units = ArrayAdapter(requireContext(), R.layout.show_list, Constants.allUnitsOfProduct)
-        val category = ArrayAdapter(requireContext(), R.layout.show_list, Constants.allProductCategory)
-        val productType = ArrayAdapter(requireContext(), R.layout.show_list, Constants.allProductType)
+        val category = ArrayAdapter(requireContext(),
+            R.layout.show_list,
+            Constants.allProductCategory
+        )
+        val productType = ArrayAdapter(requireContext(),
+            R.layout.show_list,
+            Constants.allProductType
+        )
 
         editProduct.apply {
             etProductUnit.setAdapter(units)
@@ -140,7 +186,9 @@ class HomeFragment : Fragment() {
     private fun setCategories() {
         val categoryList = ArrayList<Category>()
         for(i in 0 until Constants.allProductCategory.size){
-            categoryList.add(Category(Constants.allProductCategory[i],Constants.allProductCategoryIcon[i]))
+            categoryList.add(Category(
+                Constants.allProductCategory[i],
+                Constants.allProductCategoryIcon[i]))
         }
 
         binding.rvCategories.adapter = CategoriesAdapter(categoryList,::onCategoryClick)

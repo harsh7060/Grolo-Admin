@@ -1,9 +1,10 @@
 package com.example.blinkitadmin.viewModels
 
 import android.app.Activity
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.example.blinkitadmin.model.Admin
-import com.example.blinkitadmin.Utils
+import com.example.blinkitadmin.utils.Utils
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
@@ -13,11 +14,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import java.util.concurrent.TimeUnit
 
 class AuthViewModel: ViewModel() {
-    private val _verificationId = MutableStateFlow<String?>(null)
-    private val _sentOtp = MutableStateFlow<Boolean>(false)
-    val sentOtp = _sentOtp
+
     private val _isSignedInSuccessfully = MutableStateFlow<Boolean>(false)
     val isSignedInSuccessfully = _isSignedInSuccessfully
+
+    private val _isSignedUpSuccessfully = MutableStateFlow<Boolean>(false)
+    val isSignedUpSuccessfully = _isSignedUpSuccessfully
 
     private val _isCurrentUser = MutableStateFlow<Boolean>(false)
     val isCurrentUser = _isCurrentUser
@@ -28,42 +30,27 @@ class AuthViewModel: ViewModel() {
         }
     }
 
-    fun sendOtp(phoneNumber: String, activity: Activity){
-        val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-
-            override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+    fun signInWithCredentials(email: String, password: String, context: Context) {
+        Utils.getAuthInstance().signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener{task->
+                if(task.isSuccessful){
+                    Utils.showToast(context, "LoggedIn Successfully")
+                    isSignedInSuccessfully.value = true
+                }else{
+                    Utils.showToast(context, "Wrong Credentials")
+                }
             }
-
-            override fun onVerificationFailed(e: FirebaseException) {
-            }
-
-            override fun onCodeSent(
-                verificationId: String,
-                token: PhoneAuthProvider.ForceResendingToken,
-            ) {
-                _verificationId.value = verificationId
-                _sentOtp.value = true
-            }
-        }
-        val options = PhoneAuthOptions.newBuilder(Utils.getAuthInstance())
-            .setPhoneNumber("+91$phoneNumber") // Phone number to verify
-            .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-            .setActivity(activity) // Activity (for callback binding)
-            .setCallbacks(callbacks) // OnVerificationStateChangedCallbacks
-            .build()
-        PhoneAuthProvider.verifyPhoneNumber(options)
     }
 
-    fun signInWithPhoneAuthCredential(otp: String, userNumber: String, admin: Admin) {
-        val credential = PhoneAuthProvider.getCredential(_verificationId.value.toString(), otp)
-        Utils.getAuthInstance().signInWithCredential(credential)
-            .addOnCompleteListener{ task ->
+    fun signUpWithCredentials(email: String, password: String, admin: Admin, context: Context){
+        Utils.getAuthInstance().createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener{task->
                 admin.uid = Utils.getCurrentUserId()
-                if (task.isSuccessful) {
+                if(task.isSuccessful){
                     FirebaseDatabase.getInstance().getReference("Admins").child("AdminInfo").child(admin.uid!!).setValue(admin)
-                    isSignedInSuccessfully.value = true
-                } else {
-
+                    isSignedUpSuccessfully.value = true
+                }else{
+                    Utils.showToast(context, "Admin Registered Unsuccessfully")
                 }
             }
     }

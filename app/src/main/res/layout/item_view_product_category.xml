@@ -21,13 +21,13 @@
             android:layout_height="78.00dp"
             android:scaleType="centerInside"
             android:src="@drawable/vegetable"
-            android:background="@drawable/bg_category"/>
+            android:background="@color/white"/>
         <TextView
             android:id="@+id/tvCategoryTitle"
             android:layout_width="78.00dp"
             android:layout_height="wrap_content"
             android:text="Vegetables and Fruits"
-            android:textSize="11sp"
+            android:textSize="14.30sp"
             android:textColor="@color/black"
             android:maxLines="2"
             android:layout_marginTop="6.50dp"

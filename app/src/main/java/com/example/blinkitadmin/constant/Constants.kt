@@ -1,4 +1,6 @@
-package com.example.blinkitadmin
+package com.example.blinkitadmin.constant
+
+import com.example.blinkitadmin.R
 
 object Constants {
 
@@ -25,7 +27,7 @@ object Constants {
         "Chocolates",
         "Bread & Butter",
         "Namkeen",
-        "Aata & Rice",
+        "Flour & Rice",
         "Ice Cream",
         "Cake",
         "Ghee",
@@ -35,21 +37,20 @@ object Constants {
     )
 
     val allProductCategory = arrayOf(
-        "All",
-        "Vegetables & Fruits",
-        "Dairy & Eggs",
-        "Munchies",
+        "Fruits & Vegetables",
+        "Dairy, Bread & Eggs",
+        "Snacks & Munchies",
         "Cold Drinks & Juices",
-        "Instant & Frozen Food",
+        "Breakfast & Instant Food",
         "Tea Coffee & Health Drinks",
         "Bakery & Biscuits",
         "Sweet Tooth",
-        "Ataa Rice & Dal",
-        "Dry Fruits Masala & Oil",
+        "Flour, Rice & Dal",
+        "Masala, Oil & more",
         "Sauces & Spreads",
         "Chicken Meat & Fish",
-        "Pan Corner",
-        "Organic & Premium",
+        "Paan Corner",
+        "Organic & Healthy Living",
         "Baby Care",
         "Pharma & Wellness",
         "Cleaning Essential",
@@ -59,26 +60,26 @@ object Constants {
     )
 
     val allProductCategoryIcon = arrayOf(
-        R.drawable.vegetable,
-        R.drawable.vegetable,
-        R.drawable.dairy_breakfast,
-        R.drawable.munchies,
-        R.drawable.cold_and_juices,
+        R.drawable.veg_and_fruits,
+        R.drawable.veg_and_fruits,
+        R.drawable.dairy,
+        R.drawable.muniches,
+        R.drawable.cold_drink,
         R.drawable.instant,
         R.drawable.tea,
-        R.drawable.bakery_biscuits,
+        R.drawable.bakery,
         R.drawable.sweet_tooth,
-        R.drawable.atta_rice,
+        R.drawable.flour_rice,
         R.drawable.masala,
-        R.drawable.sauce_spreads,
-        R.drawable.chicken_meat,
-        R.drawable.paan_corner,
-        R.drawable.organic_premium,
-        R.drawable.baby,
-        R.drawable.pharma_wellness,
+        R.drawable.sauces,
+        R.drawable.chicken,
+        R.drawable.pan,
+        R.drawable.organic,
+        R.drawable.baby_care,
+        R.drawable.pharma,
         R.drawable.cleaning,
         R.drawable.home_office,
         R.drawable.personal_care,
-        R.drawable.pet_care,
+        R.drawable.pet,
     )
 }

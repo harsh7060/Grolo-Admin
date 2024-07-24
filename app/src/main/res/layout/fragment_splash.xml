@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffbe0b"
-    tools:context=".SplashFragment">
+    tools:context=".fragments.SplashFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,6 +39,14 @@
                 android:textSize="78.00dp"
                 android:textStyle="bold" />
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="24sp"/>
 
         <TextView
             android:layout_width="wrap_content"

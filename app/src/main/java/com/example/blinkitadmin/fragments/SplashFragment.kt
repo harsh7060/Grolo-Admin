@@ -1,4 +1,4 @@
-package com.example.blinkitadmin
+package com.example.blinkitadmin.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.blinkitadmin.AdminMainActivity
+import com.example.blinkitadmin.activities.AdminMainActivity
 import com.example.blinkitadmin.R
 import com.example.blinkitadmin.viewModels.AuthViewModel
 import kotlinx.coroutines.launch

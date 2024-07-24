@@ -1,4 +1,4 @@
-package com.example.blinkitadmin
+package com.example.blinkitadmin.fragments
 
 import android.content.Intent
 import android.net.Uri
@@ -11,6 +11,10 @@ import android.widget.ArrayAdapter
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.blinkitadmin.activities.AdminMainActivity
+import com.example.blinkitadmin.constant.Constants
+import com.example.blinkitadmin.R
+import com.example.blinkitadmin.utils.Utils
 import com.example.blinkitadmin.adapters.AdapterSelectedImage
 import com.example.blinkitadmin.databinding.FragmentAddProductBinding
 import com.example.blinkitadmin.model.Product
@@ -47,7 +51,7 @@ class AddProductFragment : Fragment() {
 
     private fun onAddButtonClicked() {
         binding.btnAddProduct.setOnClickListener{
-            Utils.showDialog(requireContext(),"Adding Product...")
+            Utils.showDialog(requireContext(), "Adding Product...")
             val productName = binding.etProductName.text.toString()
             val productUnit = binding.etProductUnit.text.toString()
             val productCategory = binding.etProductCategory.text.toString()
@@ -102,7 +106,7 @@ class AddProductFragment : Fragment() {
     }
 
     private fun getUrls(product: Product) {
-        Utils.showDialog(requireContext(),"Uploading Product...")
+        Utils.showDialog(requireContext(), "Uploading Product...")
         lifecycleScope.launch {
             viewModel.downloadedUrls.collect{
                 val urls = it
@@ -133,8 +137,14 @@ class AddProductFragment : Fragment() {
 
     private fun setAutoCompleteTextView() {
         val units = ArrayAdapter(requireContext(), R.layout.show_list, Constants.allUnitsOfProduct)
-        val category = ArrayAdapter(requireContext(), R.layout.show_list, Constants.allProductCategory)
-        val productType = ArrayAdapter(requireContext(), R.layout.show_list, Constants.allProductType)
+        val category = ArrayAdapter(requireContext(),
+            R.layout.show_list,
+            Constants.allProductCategory
+        )
+        val productType = ArrayAdapter(requireContext(),
+            R.layout.show_list,
+            Constants.allProductType
+        )
 
         binding.apply {
             etProductUnit.setAdapter(units)
